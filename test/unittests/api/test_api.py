@@ -80,13 +80,13 @@ class TestApi(unittest.TestCase):
 
         # check that a 300+ status code generates Exception
         mock_request.return_value = mock_response_301
-        with self.assertRaises(mycroft.api.HTTPError):
+        with self.assertRaises(mycroft.api.RequestException):
             a.send(req)
 
         # Check 401
         mock_request.return_value = mock_response_401
         req = {'path': '', 'headers': {}}
-        with self.assertRaises(mycroft.api.HTTPError):
+        with self.assertRaises(mycroft.api.RequestException):
             a.send(req)
 
         # Check refresh token

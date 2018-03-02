@@ -15,7 +15,7 @@
 from copy import copy
 
 import requests
-from requests import HTTPError
+from requests import RequestException
 
 from mycroft.configuration import Configuration
 from mycroft.configuration.config import DEFAULT_CONFIG, SYSTEM_CONFIG, \
@@ -86,7 +86,7 @@ class Api(object):
                 and not response.url.endswith("auth/token"):
             self.refresh_token()
             return self.send(self.old_params)
-        raise HTTPError(data, response=response)
+        raise RequestException(data, response=response)
 
     def get_data(self, response):
         try:
